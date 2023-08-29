@@ -36,7 +36,13 @@ class Emails
   public function __construct()
   {
     // Read the settings file
-    require 'settings.php';
+    // Read the settings file
+    if( file_exists ('settings.php') ){
+      require 'settings.php';
+    }
+    if( file_exists ('/config/settings.php') ){
+      require '/config/settings.php';
+    }  
 
     // Instantiate the Database
     $this->db = new Database();

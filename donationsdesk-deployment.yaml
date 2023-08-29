@@ -77,9 +77,7 @@ spec:
               containerPort: 80
           # Add the volume
           volumeMounts:
-          - mountPath: "/app/en/core/database"
-            name: donationsdesk-pv-storage
-          - mountPath: "/app/es/core/database"
+          - mountPath: "/config"
             name: donationsdesk-pv-storage
       # Specify the volume
       volumes:

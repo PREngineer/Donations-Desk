@@ -26,7 +26,12 @@ class Database
   public function __construct()
   {
     // Read the settings file
-    require 'settings.php';
+    if( file_exists ('settings.php') ){
+      require 'settings.php';
+    }
+    if( file_exists ('/config/settings.php') ){
+      require '/config/settings.php';
+    }    
 
     $this->dbtype = $DBTYPE;
     $this->dbname = $DBNAME;
