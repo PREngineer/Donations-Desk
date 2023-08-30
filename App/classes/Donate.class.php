@@ -210,12 +210,12 @@ class Donate extends Page
       {
         // Check this transaction was not registered before
         $count = $this->db->query_DB("SELECT COUNT(`org-id`) AS count 
-                                      FROM `osfl-donations` 
+                                      FROM `OSFL-Donations` 
                                       WHERE `transaction-id` = '" . $_POST['txn_id'] . "'")[0]['count'];
         // If not registered before
         if( $count == 0 )
         {
-          $this->db->query_DB("INSERT INTO `osfl-donations` (`org-id`, `amount`, `date`, `donor-email`, `donor-name`, `transaction-id`, `receiver`) 
+          $this->db->query_DB("INSERT INTO `OSFL-Donations` (`org-id`, `amount`, `date`, `donor-email`, `donor-name`, `transaction-id`, `receiver`) 
                                VALUES ('" . $transaction_type[1] . "', '" . $_POST['payment_gross'] . "', '" . date("Y-m-d") . "', '" . $_POST['payer_email'] . 
                                    "', '" . $_POST['first_name'] . " " . $_POST['last_name'] . "', '" . $_POST['txn_id'] . "', '" . $_POST['receiver_email'] . "')");
         }
@@ -226,18 +226,18 @@ class Donate extends Page
       { 
         // Check this transaction was not registered before
         $count = $this->db->query_DB("SELECT COUNT(`camp-id`) AS count 
-                                      FROM `campaign-donations` 
+                                      FROM `Campaign-Donations` 
                                       WHERE `transaction-id` = '".$_POST['txn_id']."'")[0]['count'];
 
         if( $count == 0 )
         {     
-          $this->db->query_DB("INSERT INTO `campaign-donations` (`camp-id`, `amount`, `date`, `donor-email`, `donor-name`, `transaction-id`, `receiver`) 
+          $this->db->query_DB("INSERT INTO `Campaign-Donations` (`camp-id`, `amount`, `date`, `donor-email`, `donor-name`, `transaction-id`, `receiver`) 
                                VALUES ('" . $transaction_type[1] . "', '" . $_POST['payment_gross'] . "', '" . date("Y-m-d") . "', '" . $_POST['payer_email'] . 
                                    "', '" . $_POST['first_name'] . " " . $_POST['last_name'] . "', '" . $_POST['txn_id'] . "', '" . $_POST['receiver_email'] . "')");
           
           // Get current amount of donations to the campaign
           $donated = $this->db->query_DB("SELECT DISTINCT SUM(amount) AS amount
-                                          FROM `campaign-donations` 
+                                          FROM `Campaign-Donations` 
                                           WHERE `camp-id` = '" . $transaction_type[1] . "'")[0]['amount'];
 
           // Update donated amount on campaign
