@@ -1,0 +1,20 @@
+# Create the Exposed App Service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: donationsdesk-external-service
+  namespace: production
+spec:
+  selector:
+    app: donationsdesk
+  type: LoadBalancer
+  ports:
+  - name: httpport
+    protocol: TCP
+    port: 8003
+    targetPort: 80
+status:
+  loadBalancer:
+    ingress:
+    - ip: 10.0.0.80
