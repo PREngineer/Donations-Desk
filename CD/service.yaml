@@ -8,7 +8,6 @@ metadata:
 spec:
   selector:
     app: donationsdesk
-  type: LoadBalancer
   ports:
   - name: http
     port: 80
