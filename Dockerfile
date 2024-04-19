@@ -9,28 +9,28 @@ RUN apk --no-cache --update \
     add apache2 \
     apache2-ssl \
     curl \
-    php5-apache2 \
-    php5-pdo \
-    php5-pdo_dblib \
-    php5-pdo_mysql \
-    php5-pdo_odbc \
-    php5-pdo_pgsql \
-    php5-pdo_sqlite \
-    php5-mysqli \
-    php5-openssl \
-    php5-bcmath \
-    php5-bz2 \
-    php5-calendar \
-    php5-common \
-    php5-ctype \
-    php5-curl \
-    php5-dom \
-    php5-gd \
-    php5-iconv \
+    php7-apache2 \
+    php7-pdo \
+    php7-pdo_dblib \
+    php7-pdo_mysql \
+    php7-pdo_odbc \
+    php7-pdo_pgsql \
+    php7-pdo_sqlite \
+    php7-mysqli \
+    php7-openssl \
+    php7-bcmath \
+    php7-bz2 \
+    php7-calendar \
+    php7-common \
+    php7-ctype \
+    php7-curl \
+    php7-dom \
+    php7-gd \
+    php7-iconv \
     php-mbstring \
     php-phar \
     php-session \
-    php5-xml \
+    php7-xml \
     tzdata \
     && mkdir /app
 
