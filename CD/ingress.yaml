@@ -15,8 +15,8 @@ metadata:
   labels:
     app: donationsdesk
   name: donationsdesk
-  # Deploy to production namespace
-  namespace: production
+  # Deploy to donationsdesk namespace
+  namespace: donationsdesk
 spec:
   rules:
   # Change to your domain

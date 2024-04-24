@@ -4,7 +4,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: donationsdesk-pv-claim
-  namespace: production
+  namespace: donationsdesk
 spec:
   storageClassName: ""
   # Name of the volume to tie to this claim
