@@ -1,37 +1,37 @@
 # Base Image is latest Alpine
-FROM alpine:3.8
+FROM alpine:3.18
 
 # Maintainer information and description
 LABEL maintainer="Jorge Pabón <pianistapr@hotmail.com>" description="A crowd-funding web application."
 
-# Setup Apache and PHP 5.4, also create the directory that will hold our application files /app
+# Setup Apache and PHP 8, also create the directory that will hold our application files /app
 RUN apk --no-cache --update \
     add apache2 \
     apache2-ssl \
     curl \
-    php7-apache2 \
-    php7-pdo \
-    php7-pdo_dblib \
-    php7-pdo_mysql \
-    php7-pdo_odbc \
-    php7-pdo_pgsql \
-    php7-pdo_sqlite \
-    php7-mysqli \
-    php7-openssl \
-    php7-bcmath \
-    php7-bz2 \
-    php7-calendar \
-    php7-common \
-    php7-ctype \
-    php7-curl \
-    php7-dom \
-    php7-gd \
-    php7-iconv \
-    php-mbstring \
-    php-phar \
-    php-session \
-    php7-xml \
-    tzdata \
+    php81-apache2 \
+    php81-bcmath \
+    php81-bz2 \
+    php81-calendar \
+    php81-common \
+    php81-ctype \
+    php81-curl \
+    php81-dom \
+    php81-gd \
+    php81-iconv \
+    php81-mbstring \
+    php81-mysqli \
+    php81-mysqlnd \
+    php81-openssl \
+    php81-pdo \
+    php81-pdo_dblib \
+    php81-pdo_mysql \
+    php81-pdo_odbc \
+    php81-pdo_pgsql \
+    php81-pdo_sqlite \
+    php81-phar \
+    php81-session \
+    php81-xml \
     && mkdir /app
 
 # Copy our application to the /app directory
@@ -41,10 +41,6 @@ RUN chmod -R 777 /app
 # Create the /config directory
 RUN mkdir /config
 RUN chmod -R 777 /config
-
-# Create the /run/apache2 directory, due to issue of it not being present in the alpine 3.8 image and not allowing to create the files in there.
-RUN mkdir /run/apache2/
-RUN chmod -R 777 /run/apache2
 
 # Expose our web ports
 EXPOSE 80 443
