@@ -1,53 +1,56 @@
-# Base Image is latest Alpine
-FROM alpine:3.18
+# Base image
+FROM alpine:3.24.3
 
 # Maintainer information and description
-LABEL maintainer="Jorge Pabón <pianistapr@hotmail.com>" description="A crowd-funding web application."
+LABEL maintainer="Jorge Pabón <pianistapr@hotmail.com>" \
+      description="A crowd-funding web application."
 
-# Setup Apache and PHP 8, also create the directory that will hold our application files /app
-RUN apk --no-cache --update \
-    add apache2 \
+# Install Apache, PHP 8.4 and required extensions
+RUN apk add --no-cache \
+    apache2 \
     apache2-ssl \
     curl \
-    php81-apache2 \
-    php81-bcmath \
-    php81-bz2 \
-    php81-calendar \
-    php81-common \
-    php81-ctype \
-    php81-curl \
-    php81-dom \
-    php81-gd \
-    php81-iconv \
-    php81-mbstring \
-    php81-mysqli \
-    php81-mysqlnd \
-    php81-openssl \
-    php81-pdo \
-    php81-pdo_dblib \
-    php81-pdo_mysql \
-    php81-pdo_odbc \
-    php81-pdo_pgsql \
-    php81-pdo_sqlite \
-    php81-phar \
-    php81-session \
-    php81-xml \
-    && mkdir /app
+    php84 \
+    php84-apache2 \
+    php84-bcmath \
+    php84-bz2 \
+    php84-calendar \
+    php84-common \
+    php84-ctype \
+    php84-curl \
+    php84-dom \
+    php84-gd \
+    php84-iconv \
+    php84-mbstring \
+    php84-mysqli \
+    php84-mysqlnd \
+    php84-openssl \
+    php84-pdo \
+    php84-pdo_dblib \
+    php84-pdo_mysql \
+    php84-pdo_odbc \
+    php84-pdo_pgsql \
+    php84-pdo_sqlite \
+    php84-phar \
+    php84-session \
+    php84-xml \
+    && mkdir -p /app /config
 
-# Copy our application to the /app directory
+# Copy the application files
 COPY ./App /app
-RUN chmod -R 777 /app
 
-# Create the /config directory
-RUN mkdir /config
-RUN chmod -R 777 /config
+# Preserve existing permissions for application compatibility
+RUN chmod -R 777 /app /config
 
-# Expose our web ports
+# Expose HTTP and HTTPS
 EXPOSE 80 443
 
 # Add the entrypoint script
-ADD entrypoint.sh /
-RUN ["chmod", "+x", "/entrypoint.sh"]
+COPY entrypoint.sh /entrypoint.sh
 
-# Execute the entrypoint script
-ENTRYPOINT ["/entrypoint.sh"]
+# Normalize Windows line endings and set executable permissions
+RUN sed -i 's/\r$//' /entrypoint.sh \
+    && chmod 755 /entrypoint.sh
+
+# Start using the shell explicitly
+ENTRYPOINT ["/bin/sh", "/entrypoint.sh"]
